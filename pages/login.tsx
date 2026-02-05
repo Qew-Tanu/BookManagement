@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Form, Input, Card, Layout, Typography, message, Row } from 'antd';
+import { Button, Form, Input, Card, Layout, Typography, message, Row, notification } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
@@ -32,7 +32,9 @@ const Login: React.FC = () => {
         throw new Error('No token received');
       }
       localStorage.setItem('token', accessToken);
-      message.success('Login successful!');
+      notification.success({
+        message: 'Login successful!',
+      });
       form.resetFields();
       router.push("/dashboard");
     } catch (error: unknown) {
@@ -41,7 +43,9 @@ const Login: React.FC = () => {
       if (errorMsg) {
         setErrorMessage(errorMsg);
       }
-      message.error(errorMsg || 'Login failed');
+      notification.error({
+        message: errorMsg || 'Login failed!',
+      });
     }
   };
 

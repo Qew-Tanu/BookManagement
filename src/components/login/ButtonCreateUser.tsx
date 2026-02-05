@@ -1,4 +1,4 @@
-import { Button, Col, Form, Input, message, Modal, Row, Typography } from 'antd';
+import { Button, Col, Form, Input, message, Modal, notification, Row, Typography } from 'antd';
 import React, { useState } from 'react';
 import _ from 'lodash';
 import api from '../../utils/api';
@@ -25,13 +25,17 @@ export default function ButtonCreateUser() {
         email: values.email,
         password: values.password,
       });
-      message.success('User registration successful!');
+      notification.success({
+        message: 'Registration successful!',
+      });
       form.resetFields();
       setIsModalOpen(false);
     } catch (error: unknown) {
       console.error(error);      
       const errorMsg = _.get(error, 'response.data.message', 'Registration failed');
-      message.error(errorMsg);
+      notification.error({
+        message: errorMsg,
+      });
     }
   };
 
