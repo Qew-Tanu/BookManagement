@@ -40,8 +40,6 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
-    console.log(search);
-
     getReport();
   }, [search?.genre, search?.startYear, search?.endYear]);
 
