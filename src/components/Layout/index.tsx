@@ -1,17 +1,13 @@
-import React, { ReactNode } from 'react';
-import {
-  BookOutlined,
-  DashboardOutlined,
-} from '@ant-design/icons';
+import React, { ReactNode, useEffect, useState } from 'react';
+import { BookOutlined, DashboardOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Col, Layout, Menu, Row, theme } from 'antd';
 import { useRouter } from 'next/router';
 import { Typography } from 'antd';
 
-const { Text} = Typography;
+const { Text } = Typography;
 
-const {  Content, Footer } = Layout;
-
+const { Header, Content, Footer } = Layout;
 
 const items: MenuProps['items'] = [
   {
@@ -33,15 +29,53 @@ interface AppLayoutProps {
 const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
   const router = useRouter();
 
-  const currentMenuKey = router.pathname.split('/')[1] || 'dashboard';  
-  
+  const currentMenuKey = router.pathname.split('/')[1];  
+
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
-      <Row
+      <Header
+        style={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 1,
+          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
+          Book Management System
+        </Text>
+      </Header>
+      <Header
+        style={{
+          position: 'sticky',
+          top: 64,
+          zIndex: 1,
+          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          // defaultSelectedKeys={[currentMenuKey]}
+          selectedKeys={[currentMenuKey]}
+          onClick={(item) => {
+            router.push(`/${item.key}`);
+          }}
+          items={items}
+          style={{ flex: 1, minWidth: 0 }}
+        />
+      </Header>
+      {/* <Row
         style={{
           backgroundColor: '#001529',
         }}
@@ -73,7 +107,7 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
             />
           </Row>
         </Col>
-      </Row>
+      </Row> */}
 
       <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
         <div
@@ -84,15 +118,13 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
             borderRadius: borderRadiusLG,
           }}
         >
-        {/* <Text strong style={{ fontSize: 24, marginBottom: 16, display: 'block' }}>
+          {/* <Text strong style={{ fontSize: 24, marginBottom: 16, display: 'block' }}>
           {currentMenuKey.charAt(0).toUpperCase() + currentMenuKey.slice(1)}
         </Text> */}
           {children}
         </div>
       </Content>
-      <Footer style={{ textAlign: 'center' }}>
-        created By Qewww - Ant Design
-      </Footer>
+      <Footer style={{ textAlign: 'center' }}>created By Qewww - Ant Design</Footer>
     </Layout>
   );
 };
