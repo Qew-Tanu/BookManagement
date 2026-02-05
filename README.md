@@ -1,4 +1,10 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Book Management System
+
+A Next.js application for managing book records with a dashboard and CRUD operations.
+
+## I deploy it on Vercel
+
+🚀 **[View Live Demo](https://book-management-fawn.vercel.app/)**
 
 ## Getting Started
 

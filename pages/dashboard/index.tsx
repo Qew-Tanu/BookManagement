@@ -2,54 +2,9 @@ import BarChartComponent from '@/src/components/dashboard/BarChartComponent';
 import PieChartComponent from '@/src/components/dashboard/PieChartComponent';
 import api from '@/src/utils/api';
 import { genreList } from '@/src/utils/genreList';
-import { Col, DatePicker, Row, Select } from 'antd';
+import { Col, DatePicker, Row, Select, Skeleton } from 'antd';
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
-
-const data = [
-  {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400,
-  },
-  {
-    name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210,
-  },
-  {
-    name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290,
-  },
-  {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000,
-  },
-  {
-    name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-    amt: 2181,
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-    amt: 2500,
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-    amt: 2100,
-  },
-];
 interface SearchParams {
   genre?: string;
   startYear?: dayjs.Dayjs;
@@ -85,8 +40,6 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
-    console.log(search);
-
     getReport();
   }, [search?.genre, search?.startYear, search?.endYear]);
 
@@ -94,7 +47,7 @@ export default function Dashboard() {
     <Row justify="center" align="middle">
       <Col span={24}>
         <Row style={{ width: '100%' }} gutter={16}>
-          <Col sm={{flex:"none"}} xs={{span:24}}>
+          <Col sm={{ flex: 'none' }} xs={{ span: 24 }}>
             <Select
               placeholder="Select the genre"
               options={genreList}
@@ -123,8 +76,18 @@ export default function Dashboard() {
           </Col>
         </Row>
       </Col>
-      <BarChartComponent data={barChartData} />
-      <PieChartComponent data={barChartData} />
+      {tableLoading && barChartData.length === 0 ? (
+        <Skeleton
+          active
+          paragraph={{ rows: 10 }}
+          style={{ width: '100%', marginTop: 32, minHeight: 400, maxWidth: 700 }}
+        />
+      ) : (
+        <>
+          <BarChartComponent data={barChartData} />
+          <PieChartComponent data={barChartData} />
+        </>
+      )}
     </Row>
   );
 }
