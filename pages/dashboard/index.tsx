@@ -78,7 +78,7 @@ export default function Dashboard() {
           </Col>
         </Row>
       </Col>
-      {tableLoading ? (
+      {tableLoading && barChartData.length === 0 ? (
         <Skeleton
           active
           paragraph={{ rows: 10 }}
