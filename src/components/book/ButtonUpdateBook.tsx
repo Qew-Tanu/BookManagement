@@ -31,7 +31,7 @@ export default function ButtonUpdateBook({ id, afterFinish }: ButtonUpdateBookPr
   const getDetailData = async () => {
     setLoading(true);
     try {
-      const data = await api.get(`/api/books/${id}`);
+      const data = await api.get(`/api/books/detail/${id}`);
       form.setFieldsValue({
         title: data.data.title,
         author: data.data.author,

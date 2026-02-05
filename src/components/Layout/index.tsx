@@ -29,7 +29,19 @@ interface AppLayoutProps {
 const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
   const router = useRouter();
 
-  const currentMenuKey = router.pathname.split('/')[1];  
+  useEffect(() => {
+    const checkAuth = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        router.replace('/login');
+        return;
+      }
+    };
+
+    checkAuth();
+  }, [router]);
+
+  const currentMenuKey = router.pathname.split('/')[1];
 
   const {
     token: { colorBgContainer, borderRadiusLG },
