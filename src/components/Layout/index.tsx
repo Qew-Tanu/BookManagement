@@ -1,7 +1,7 @@
 import React, { ReactNode, useEffect, useState } from 'react';
-import { BookOutlined, DashboardOutlined } from '@ant-design/icons';
+import { BookOutlined, DashboardOutlined, LogoutOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Col, Layout, Menu, Row, theme } from 'antd';
+import { Button, Col, Layout, Menu, Modal, Row, theme } from 'antd';
 import { useRouter } from 'next/router';
 import { Typography } from 'antd';
 
@@ -58,11 +58,34 @@ const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          padding: '0 5px',
         }}
       >
-        <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
-          Book Management System
-        </Text>
+        <Col flex={1}>
+          <Row align="middle" justify="center">
+            <Text style={{ fontSize: 18, fontWeight: 'bold', color: 'white' }}>
+              Book Management System
+            </Text>
+          </Row>
+        </Col>
+        <Col flex={'none'}>
+          <Button
+            type="primary"
+            danger
+            onClick={() => {
+              Modal.confirm({
+                title: 'Logout',
+                content: 'Are you sure you want to logout?',
+                onOk: () => {
+                  localStorage.removeItem('token');
+                  router.push('/login');
+                },
+              });
+            }}
+          >
+            <LogoutOutlined />
+          </Button>
+        </Col>
       </Header>
       <Header
         style={{

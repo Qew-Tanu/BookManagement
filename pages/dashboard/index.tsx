@@ -1,4 +1,5 @@
 import BarChartComponent from '@/src/components/dashboard/BarChartComponent';
+import PieChartComponent from '@/src/components/dashboard/PieChartComponent';
 import api from '@/src/utils/api';
 import { genreList } from '@/src/utils/genreList';
 import { Col, DatePicker, Row, Select } from 'antd';
@@ -93,7 +94,7 @@ export default function Dashboard() {
     <Row justify="center" align="middle">
       <Col span={24}>
         <Row style={{ width: '100%' }} gutter={16}>
-          <Col lg={{ span: 24 }}>
+          <Col sm={{flex:"none"}} xs={{span:24}}>
             <Select
               placeholder="Select the genre"
               options={genreList}
@@ -123,6 +124,7 @@ export default function Dashboard() {
         </Row>
       </Col>
       <BarChartComponent data={barChartData} />
+      <PieChartComponent data={barChartData} />
     </Row>
   );
 }

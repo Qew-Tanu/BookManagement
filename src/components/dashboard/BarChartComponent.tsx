@@ -12,9 +12,6 @@ const { useBreakpoint } = Grid;
 
 export default function BarChartComponent({ data }: BarChartComponentProps) {
 const screens = useBreakpoint();
-
-console.log(screens);
-
   
   return (
     <>
@@ -40,7 +37,7 @@ console.log(screens);
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="year" />
-        <YAxis width="auto" />
+        <YAxis width="auto" type="number" />
         <Tooltip />
         <Legend />
         <Bar
@@ -78,9 +75,3 @@ console.log(screens);
     </>
   );
 }
-// export const genreList = [
-//   { value: 'Mystery', label: 'Mystery' },
-//   { value: 'Fantasy', label: 'Fantasy' },
-//   { value: 'Romance', label: 'Romance' },
-//   { value: 'Horror', label: 'Horror' },
-// ]
