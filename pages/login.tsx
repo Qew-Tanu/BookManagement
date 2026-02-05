@@ -19,9 +19,11 @@ const Login: React.FC = () => {
   const [form] = Form.useForm();
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const onFinish = async (values: ILoginValues) => {
     console.log('Received values of form: ', values);
+    setLoading(true);
     try {
       const response = await api.post('/api/auth/login', {
         email: values.email,
@@ -36,7 +38,7 @@ const Login: React.FC = () => {
         message: 'Login successful!',
       });
       form.resetFields();
-      router.push("/dashboard");
+      router.push('/dashboard');
     } catch (error: unknown) {
       console.error(error);
       const errorMsg = _.get(error, 'response.data.message');
@@ -46,6 +48,8 @@ const Login: React.FC = () => {
       notification.error({
         message: errorMsg || 'Login failed!',
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -100,7 +104,13 @@ const Login: React.FC = () => {
                 </Row>
               )}
               <Form.Item>
-                <Button type="primary" htmlType="submit" className="login-form-button" block>
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="login-form-button"
+                  block
+                  loading={loading}
+                >
                   Log in
                 </Button>
                 <ButtonCreateUser />

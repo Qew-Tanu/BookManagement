@@ -15,10 +15,11 @@ interface IFormValues {
 export default function ButtonCreateUser() {
   const [form] = Form.useForm();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const onFinish = async (values: IFormValues) => {
     console.log('values', values);
-
+    setLoading(true);
     try {
       await api.post('/api/auth/register', {
         name: values.name,
@@ -31,11 +32,13 @@ export default function ButtonCreateUser() {
       form.resetFields();
       setIsModalOpen(false);
     } catch (error: unknown) {
-      console.error(error);      
+      console.error(error);
       const errorMsg = _.get(error, 'response.data.message', 'Registration failed');
       notification.error({
         message: errorMsg,
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -79,7 +82,11 @@ export default function ButtonCreateUser() {
           >
             <Input placeholder="Enter your email" />
           </Form.Item>
-          <Form.Item label="Password" name="password" rules={[{ required: true, message: 'Please input your password!' }]}>
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[{ required: true, message: 'Please input your password!' }]}
+          >
             <Input.Password placeholder="Enter your password" />
           </Form.Item>
           <Form.Item
@@ -101,7 +108,7 @@ export default function ButtonCreateUser() {
             <Input.Password placeholder="Confirm your password" />
           </Form.Item>
           <Form.Item>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" loading={loading}>
               Register
             </Button>
           </Form.Item>
