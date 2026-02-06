@@ -1,43 +1,40 @@
 # Book Management System
 
-A Next.js application for managing book records with a dashboard and CRUD operations.
+A Next.js application for managing book records with a dashboard, charts, and full CRUD for books.
 
-## I deploy it on Vercel
+🚀 Live demo: https://book-management-fawn.vercel.app/
 
-🚀 **[View Live Demo](https://book-management-fawn.vercel.app/)**
+## What the site includes
 
-## Getting Started
+- **Home / Books list:** browse all books and view basic details.
+- **Login page:** simple authentication entry point (pages/login.tsx).
+- **Books CRUD:** create, update and delete books via the `book` pages and `src/components/book/FormBook.tsx`.
+- **Dashboard:** visual summaries with a bar chart and pie chart (`src/components/dashboard/BarChartComponent.tsx`, `PieChartComponent.tsx`).
+- **Reusable UI:** create/update/delete buttons under `src/components/book/` for consistent actions.
+- **API utilities:** central API helpers in `src/utils/api.ts`.
 
-First, run the development server:
+## Project structure (high level)
+
+- `pages/` — Next.js pages (index, login, book, dashboard).
+- `src/components/` — UI components and form helpers.
+- `src/utils/` — API helpers and constants (e.g., `genreList`).
+- `public/`, `styles/`, `theme/` — static assets, global styles, theme config.
+
+## Run locally
+
+Install dependencies and start the dev server:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Notes & next steps
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- The app is scaffolded with Next.js and TypeScript.
+- If you want, I can add more documentation for components or add example API endpoints.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-"# BookManagement" 
+--
+Updated README to reflect current site pages and components.
